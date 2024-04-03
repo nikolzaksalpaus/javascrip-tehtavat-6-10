@@ -1,0 +1,13 @@
+body{
+    padding: 0;
+    margin: 0;
+    color: #ECECEC;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.App{
+    background: #2C2C2C;
+    width: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+}
