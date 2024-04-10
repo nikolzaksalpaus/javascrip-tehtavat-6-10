@@ -9,14 +9,20 @@ export default function Tehatava10(){
     ]
 
     const [result, setResult] = useState([])
-    const [time, setTime] = useState(0)
+    const [time1, setTime1] = useState(0)
 
-    const [cars, setCars] = useState([]) // tätä muuttuja tarvitaan toisessa metodissa
-    const result2 = useMemo(() => bubbleSort(cars), [cars]) // useMemon kautta voi nopeutettua skriptiä, koska
-                                                            // se päivittää muuttujan vain kun sitä tarvitaan
     const [time2, setTime2] = useState(0)
+    const [cars, setCars] = useState([]) // tätä muuttuja tarvitaan toisessa metodissa
+    const result2 = useMemo(() => {
+        const sort = bubbleSort(cars)
+        setTime2(sort[1])
+        return sort[0]
+    }, [cars]) // useMemon kautta voi nopeutettua skriptiä, koska
+               // se päivittää muuttujan vain kun sitä tarvitaan
+               // (se ei nopeutetu)
 
     function bubbleSort(data){
+        const start = performance.now()
         let changed = true
         const newData = [...data]
         while(changed){
@@ -31,7 +37,9 @@ export default function Tehatava10(){
                 }
             }
         }
-        return newData
+        const end = performance.now()
+        const time = end - start
+        return [newData, time]
         /* return data.sort((a, b) => b.nopeus - a.nopeus) */ // Sama juttu, mutta lyhyempi ja muu algoritmi
     }
     
@@ -42,16 +50,12 @@ export default function Tehatava10(){
                 <p key={car.key}>{JSON.stringify(car)}</p>
             )) }
             <button onClick={() => {
-                const start = performance.now()
-                setResult(bubbleSort(initialCars)) // metodi 1
-                const end = performance.now()
-                setTime(end - start)
-                const start2 = performance.now()
+                const metodi1 = bubbleSort(initialCars) // metodi 1
+                setResult(metodi1[0])
+                setTime1(metodi1[1])
                 setCars(initialCars) // metodi 2
-                const end2 = performance.now()
-                setTime2(end2 - start2)
             }}>Convert</button>
-            <p>Metodi 1, {time}ms:</p>
+            <p>Metodi 1, {time1}ms:</p>
             { result.map((res) => (
                 <p key={res.key}>{JSON.stringify(res)}</p>
             )) }
