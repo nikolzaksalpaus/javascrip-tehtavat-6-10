@@ -19,7 +19,7 @@ export default function Tehatava10(){
         return sort[0]
     }, [cars]) // useMemon kautta voi nopeutettua skriptiä, koska
                // se päivittää muuttujan vain kun sitä tarvitaan
-               // (se ei nopeutetu)
+               // (se jostain syystä toimii päinvastoin)
 
     function bubbleSort(data){
         const start = performance.now()
