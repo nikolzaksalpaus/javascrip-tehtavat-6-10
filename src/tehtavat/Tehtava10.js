@@ -17,7 +17,22 @@ export default function Tehatava10(){
     const [time2, setTime2] = useState(0)
 
     function bubbleSort(data){
-        return data.sort((a, b) => b.nopeus - a.nopeus)
+        let changed = true
+        const newData = [...data]
+        while(changed){
+            changed = false
+            for(let i = 0; i < data.length - 1; i++){
+                console.log(newData[i])
+                if(newData[i].nopeus>newData[i+1].nopeus) {
+                    changed = true
+                    const a = newData[i]
+                    newData[i] = newData[i+1]
+                    newData[i+1] = a
+                }
+            }
+        }
+        return newData
+        /* return data.sort((a, b) => b.nopeus - a.nopeus) */ // Sama juttu, mutta lyhyempi ja muu algoritmi
     }
     
     return(
